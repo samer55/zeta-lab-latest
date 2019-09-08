@@ -1,0 +1,43 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+  source 'https://github.com/CocoaPods/Specs.git'
+
+  # Change 'MapApp' to match the target in your Xcode project.
+  target 'zeta' do
+
+    pod 'yoga', :path => '../node_modules/react-native/ReactCommon/yoga/yoga.podspec'
+    pod 'React', path: '../node_modules/react-native', :subspecs => [
+      'Core',
+      'RCTActionSheet',
+
+      'RCTAnimation',
+      'RCTGeolocation',
+      'RCTImage',
+      'RCTLinkingIOS',
+      'RCTNetwork',
+      'RCTSettings',
+      'RCTText',
+      'RCTVibration',
+      'RCTWebSocket'
+    ]
+
+    pod 'GoogleMaps'
+
+    pod 'react-native-mapbox-gl', :path => '../node_modules/@mapbox/react-native-mapbox-gl'
+
+
+    pod 'RNImageCropPicker', :path => '../node_modules/react-native-image-crop-picker'
+    pod 'RNDynamicCropper', :path =>  '../node_modules/react-native-dynamic-cropper'
+
+  end
+  post_install do |installer|
+    installer.pods_project.targets.each do |target|
+      if target.name == "React"
+        target.remove_from_project
+      end
+      if target.name == "yoga"
+        target.remove_from_project
+      end
+    end
+  end
